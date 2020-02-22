@@ -5,10 +5,16 @@ using namespace std;
 
     Quash::Quash(){
         numElements = 0;
-        heap = new node*[20]{nullptr};
+        heap = new node*[100]{nullptr};
         hashtable = new node*[43]{nullptr};
     }
 
+
+    void Quash::fixHeap(node * n){	
+
+	return;
+}
+    
     void Quash::setLinks(node* H, node* hea){
 
         H->link=hea;
@@ -16,6 +22,8 @@ using namespace std;
         
         return;
         }
+
+
     void Quash::insert(int item){
         cout << "insert" << endl;
         node* h = insertHeap(item);
@@ -23,6 +31,8 @@ using namespace std;
         setLinks(h,ha);
 
     }
+
+
     node* Quash::insertHeap(int item){
         //insert heap
         node* *h = heap;
@@ -35,8 +45,6 @@ using namespace std;
             return h[0];
             cout << h[0]->value << " heap " << h[0]->count << endl;
         
-            //n->link = h[0];
-            //cout << h[0]->value << endl;
         }
         //if element exists
         else{
@@ -52,19 +60,12 @@ using namespace std;
         //add element to end of heap
         numElements++;
         int i = numElements-1;
-        heap[i] = new node(item,1);
-        //fix
-        int parent = i/2;
-        while(i!=0 &&heap[parent]>heap[i]){
-            int temp = heap[i]->value;
-            heap[i]->value = heap[parent]->value;
-            heap[parent]->value = heap[temp]->value;
-            i = parent;
-        }
-        cout << "heap fix" << endl;
-        return heap[i];
-        //n->link = heap[i];
-        cout << " heap value " << heap[i]->value  << heap[i]->count << endl;
+        node* n = heap[i];
+        n = new node(item,1);
+       n->index = i;
+        //fixHeap(n);
+        return n;
+        
 
 
     }
@@ -80,10 +81,13 @@ using namespace std;
         }
          node* n = hashtable[hashF];//point to linked list at hash
 
-        
+        cout << "null" << endl;
          //if no value in list
-        if(n == NULL){
-            n = new node(item,1);
+        if(hashtable[hashF] == NULL){
+            cout << "now" << endl;
+            node* x = new node(item,1);
+            hashtable[5] = x;
+
             
             cout << "insert hash new node" << n->value << " " << n->count<<  endl;
             return n;
@@ -117,7 +121,7 @@ using namespace std;
                 cout << "item found, count = " << n->count << endl;
                 return n;
             }
-            n = n->next;
+            n = n->next; 
         }
         cout << "item not found" << endl;
         return n;
@@ -126,9 +130,29 @@ using namespace std;
 
 
 
-		int deleteItem(int i){
+		int Quash::deleteItem(int i){
+            if(lookup(i)==NULL){
+                cout << "item not in table" << endl;
+                return -1;
+            }
+            node* n = lookup(i);
+            n->count--;
+            if(n->count == 0){
+                //remove node from hash
+            }
             return 0;
         }
-		void print(){
+
+        int Quash::deleteMin(){
+            return 0;
+
+        }
+		void Quash::print(){
+             node* *h = heap;
+             cout << "heap content" << endl;
+             for(int i = 0; i< numElements ; i++){
+                 cout  << h[i]->value << " " << endl;
+             }
+
             return;
         }

@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
           int i = stoi(token);
           int numToInsert = i;
           q.insert(i);
+          q.print();
           
                 command = "";
       }

@@ -23,7 +23,8 @@ struct node {
 	int value;
 	int count;
 	node *next;  // pointer to next node in linkedlist (points to nullptr in heapArray nodes)
-	node *link;  // pointer to hashArray/heapArray's corresponding node
+	node *link;
+    int index;  // pointer to hashArray/heapArray's corresponding node
 };
 
 #endif
