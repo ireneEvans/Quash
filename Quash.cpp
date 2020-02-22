@@ -73,37 +73,33 @@ using namespace std;
 	node* Quash::insertHash(int item){
         //insert in hash
         int hashF = abs(item%43);//get hash value
-        if(item < 0){
-            hashF += 43;
+       
+       
+         
+        
+    
+        //if empty list   
+          if (hashtable[hashF]==nullptr) {
+            hashtable[hashF] = new node(item,1);
+            cout << "DONE\n";
+             return hashtable[hashF];
         }
-        if(hashtable[hashF]==NULL){
-            cout << "null " << endl;
-        }
-         node* n = hashtable[hashF];//point to linked list at hash
 
-        cout << "null" << endl;
-         //if no value in list
-        if(hashtable[hashF] == NULL){
-            cout << "now" << endl;
-            node* x = new node(item,1);
-            hashtable[5] = x;
 
             
-            cout << "insert hash new node" << n->value << " " << n->count<<  endl;
-            return n;
-        }
-        
-         // if it doesnt exist
+            cout << "insert hash new node" << hashtable[hashF]->value << " " << hashtable[hashF]->count<<  endl;
+        // //  // if it doesnt exist
+            node* n = hashtable[hashF];//point to linked list at hash
 
-          if(lookup(item)==NULL){
+              if(lookup(item)==NULL){
             cout<<" it doesnt exist yet"<< endl;
             while(n->next != NULL){
-                n = n->next;
+                 n = n->next;
             }
-            n->next = new node(item,1);
+           n->next = new node(item,1);
         }
-         return n->next;
-        }
+          return n->next;
+         }
 
 
     
